@@ -1,10 +1,10 @@
-config.env
+# config.env
 *.pyc
 data*
 .vscode
 .idea
 *.json
-*.pickle
+# *.pickle
 .netrc
 log.txt
 accounts/*
