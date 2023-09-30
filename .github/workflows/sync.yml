@@ -1,0 +1,30 @@
+name: Sync with Public Repo
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs daily at midnight
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@users.noreply.github.com'
+
+      - name: Add public repo as remote
+        run: git remote add public-origin https://github.com/ShanelkaPramuditha/mirror-leech-telegram-bot.git
+
+      - name: Fetch changes from public repo
+        run: git fetch public-origin
+
+      - name: Merge changes from public repo
+        run: git merge public-origin/main # Merge the desired branch
+
+      - name: Push changes to private repo
+        run: git push origin main # Push to the desired branch in your private repo
